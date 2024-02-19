@@ -48,5 +48,17 @@ export const createAffiliations = async (req,res)=>{
     } catch (error) {
             res.status(500).json({ responseError: error });
       }
+}
 
+export const getAffilationsById = async (req,res)=>{
+  try{
+    const {id} = req.params;
+    const query = await Affiliations.findById(id);
+    if (!query){
+        return res.status(404).json({ response: "not found" });
+    } 
+    return res.json({ response: "Affiliations find", details: query });
+  } catch (error) {
+    res.status(500).json({ response: error });
+  }
 }

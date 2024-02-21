@@ -1,10 +1,14 @@
-import { Router } from "express";
-import  * as affiliationsControllers from "../controllers/affiliations.controllers";
+import { Router } from "express"
+import { getAll, getById, create } from '../controllers/affiliations.controllers.js'
 
-const router = Router();
+const routerAffiliations = Router()
 
-router.get('/', affiliationsControllers.getData);
-router.post('/',affiliationsControllers.createAffiliations);
-router.get('/:id/',affiliationsControllers.getAffilationsById);
+routerAffiliations
 
-export default router;
+    .get('/affiliations', getAll)
+
+    .get('/affiliations/:id', getById)
+
+    .post('/affiliations', create)
+
+export { routerAffiliations }

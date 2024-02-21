@@ -1,4 +1,5 @@
-import {Schema,  model} from 'mongoose';
+import { Schema, model } from 'mongoose';
+
 const affiliationSchena = new Schema({
     name: {
         type: String,
@@ -15,40 +16,40 @@ const affiliationSchena = new Schema({
         required: true,
         trim: true
     },
-    entity : {
+    entity: {
         type: String,
         required: true,
         trim: true
     },
-    town : {
-        type : String,
+    town: {
+        type: String,
         required: true,
         trim: true
     },
-    postcode:{
-        type : Number,
+    postcode: {
+        type: Number,
         required: true
     },
     secction_vote: {
         type: Number
     },
-    phone_number:{
+    phone_number: {
         type: Number
 
     },
     address_home: {
         type: String,
-        required:  true,
-        trim :  true
+        required: true,
+        trim: true
     },
     visible: {
         type: Boolean,
         required: true,
-        default : true
+        default: true
     }
-},{
-    versionKey : false,
-    timestamps : true
+}, {
+    versionKey: false,
+    timestamps: true
 });
 
-export default  model('Affiliations',affiliationSchena);
+export const Affiliations = model('Affiliations', affiliationSchena)

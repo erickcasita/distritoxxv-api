@@ -13,10 +13,10 @@ const getAll = async (req, res) => {
     }
 }
 
-const getByName = async (req, res) => {
+const getByEntity = async (req, res) => {
     try {
-        const { name } = req.params;
-        const query = await Town.findOne({ name: name })
+        const { entity } = req.params;
+        const query = await Town.find({ entity: entity })
         if (query) {
             return query
                 ? res.status(200).json({ status: 200, response: "success", data: query })
@@ -27,4 +27,4 @@ const getByName = async (req, res) => {
     }
 }
 
-export { getAll, getByName }
+export { getAll, getByEntity }

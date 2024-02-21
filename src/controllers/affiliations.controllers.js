@@ -41,7 +41,7 @@ const create = async (req, res) => {
             address_home,
         } = req.body;
 
-        const newAffiliations = new Affiliations({
+        const newAffiliations = {
             name: name,
             last_name: last_name,
             rol: rol,
@@ -51,8 +51,8 @@ const create = async (req, res) => {
             secction_vote: secction_vote,
             phone_number: phone_number,
             address_home: address_home
-        });
-        const saveData = await newAffiliations.save();
+        };
+        const saveData = await Affiliations.create(newAffiliations);
         return saveData
             ? res
                 .status(200)

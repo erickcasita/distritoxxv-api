@@ -1,5 +1,4 @@
-import { ObjectId } from 'mongoose'
-import { Affiliations } from '../models/affiliations.model.js'
+import { Affiliations } from '../models/affiliation.model.js'
 
 const getAll = async (req, res) => {
     try {

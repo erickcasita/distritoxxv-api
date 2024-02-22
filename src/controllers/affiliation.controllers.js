@@ -3,11 +3,11 @@ import { Affiliations } from '../models/affiliation.model.js'
 const getAll = async (req, res) => {
     try {
         const query = await Affiliations.find()
-        if (query) {
-            return query.length != 0
-                ? res.status(200).json({ status: 200, response: "success", data: query })
-                : res.status(404).json({ status: 404, responseError: "not found" })
-        }
+
+        return query.length != 0
+            ? res.status(200).json({ status: 200, response: "success", data: query })
+            : res.status(404).json({ status: 404, responseError: "not found" })
+
     } catch (error) {
         return res.status(500).json({ status: 500, responseError: error })
     }
@@ -15,14 +15,15 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const query = await Affiliations.findById(id);
-        if (!query) {
-            return res.status(404).json({ response: "not found" });
-        }
-        return res.json({ response: "Affiliations find", details: query });
+        const { id } = req.params
+        const query = await Affiliations.findById(id)
+
+        return !query
+            ? res.status(404).json({ response: "not found" })
+            : res.json({ response: "Affiliations find", details: query })
+
     } catch (error) {
-        res.status(500).json({ responseError: error });
+        res.status(500).json({ responseError: error })
     }
 }
 
@@ -38,7 +39,7 @@ const create = async (req, res) => {
             secction_vote,
             phone_number,
             address_home,
-        } = req.body;
+        } = req.body
 
         const newAffiliations = {
             name: name,
@@ -50,15 +51,15 @@ const create = async (req, res) => {
             secction_vote: secction_vote,
             phone_number: phone_number,
             address_home: address_home
-        };
-        const saveData = await Affiliations.create(newAffiliations);
+        }
+        const saveData = await Affiliations.create(newAffiliations)
         return saveData
             ? res
                 .status(200)
                 .json({ response: "Afiliacion creada correctamente", details: saveData })
-            : res.status(500).json({ response: "error" });
+            : res.status(500).json({ response: "error" })
     } catch (error) {
-        res.status(500).json({ responseError: error });
+        res.status(500).json({ responseError: error })
     }
 }
 

@@ -16,12 +16,11 @@ const getAll = async (req, res) => {
 const getByEntity = async (req, res) => {
     try {
         const { entity } = req.params;
-        const query = await Town.find({ entity: entity })
-        if (query) {
-            return query
-                ? res.status(200).json({ status: 200, response: "success", data: query })
-                : res.status(404).json({ status: 404, responseError: "not found" })
+        const query = await Town.findOne({ entity: entity })
+        if (!query) {
+            return res.status(404).json({ status: 404, responseError: "not found" })
         }
+        return res.status(200).json({ status: 200, response: "success", data: query })
     } catch (error) {
         return res.status(500).json({ status: 500, responseError: error })
     }

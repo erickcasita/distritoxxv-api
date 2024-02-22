@@ -4,7 +4,7 @@ const getAll = async (req, res) => {
     try {
         const query = await State.find()
         if (query) {
-            return query
+            return query.length != 0
                 ? res.status(200).json({ status: 200, response: "success", data: query })
                 : res.status(404).json({ status: 404, responseError: "not found" })
         }

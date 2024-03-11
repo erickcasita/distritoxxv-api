@@ -62,5 +62,28 @@ const create = async (req, res) => {
         res.status(500).json({ responseError: error })
     }
 }
+const update = async (req, res) => {
+    try{
+        const {id} = req.params;
+        
+        const  affiliationsfind = await Affiliations.findById(id);
+        
+        if(!affiliationsfind){
+            return res.status(404).json({ response: " user not found" })
+        }else{
+          
 
-export { getAll, getById, create }
+            const updatedAffiliations = await Affiliations.findByIdAndUpdate(id, req.body, { new: true } );
+    
+            if (updatedAffiliations) {
+                return res.status(200).json({ response: "Afiliación editada", details: updatedAffiliations});
+            } else {
+                return res.status(404).json({ response: "Afiliación no encontrada" });
+            }
+        }
+    }catch(error){
+        
+        res.status(500).json({ responseError: error })
+    }
+}
+export { getAll, getById, create,update }
